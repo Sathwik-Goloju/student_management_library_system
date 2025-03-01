@@ -1,6 +1,6 @@
 package com.example.student_management_lib_system.model;
 
-import com.example.student_management_lib_system.CardStatus;
+import com.example.student_management_lib_system.enums.CardStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

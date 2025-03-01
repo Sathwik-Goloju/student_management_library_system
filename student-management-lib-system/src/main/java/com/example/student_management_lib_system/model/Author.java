@@ -18,6 +18,9 @@ public class Author {
     @Column(name = "email",nullable = false)
     private String email;
 
+    @Column(name = "gender",nullable = false)
+    private String gender;
+
     @Column(name = "country",nullable = false)
     private String country;
 
