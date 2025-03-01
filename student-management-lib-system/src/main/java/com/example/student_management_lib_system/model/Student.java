@@ -37,6 +37,16 @@ public class Student {
     @Column(name = "dept",nullable = false)
     private String dept;
 
+    @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)  //Cascade-when we do operations(add/delete) that will takes place in card also
+    private Card card;
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
 
     //mention the getters and setters using generate option for above fields
     public int getId() {

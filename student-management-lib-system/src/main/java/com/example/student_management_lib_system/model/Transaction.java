@@ -29,6 +29,30 @@ public class Transaction    {
     @Column(name = "fine")
     private double fine;
 
+    @ManyToOne
+    @JoinColumn
+    private Book book;
+
+    @ManyToOne
+    @JoinColumn
+    private Card card;
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
     public int getId() {
         return id;
     }

@@ -4,7 +4,9 @@ import com.example.student_management_lib_system.enums.Genre;
 import jakarta.persistence.*;
 
 import javax.xml.crypto.Data;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "book")
@@ -36,6 +38,41 @@ public class Book {
 
     @Column(name = "availability",nullable = false)
     private boolean availability;
+
+    @ManyToOne
+    @JoinColumn
+    private Author author;
+
+    @ManyToOne
+    @JoinColumn
+    private Card card;
+
+    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
+    private List<Transaction> transactionsByBook=new ArrayList<>();
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public List<Transaction> getTransactionsByBook() {
+        return transactionsByBook;
+    }
+
+    public void setTransactionsByBook(List<Transaction> transactionsByBook) {
+        this.transactionsByBook = transactionsByBook;
+    }
 
     public int getId() {
         return id;

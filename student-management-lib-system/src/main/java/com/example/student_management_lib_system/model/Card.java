@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "card")
@@ -27,6 +29,40 @@ public class Card {
     @Column(name = "updated_date",nullable = false)
     @UpdateTimestamp    //It automatically updates date&time
     private Date updatedDate;
+
+    @OneToOne
+    @JoinColumn  // it joins the primary key of student table into card table as foreign key
+    private Student student;
+
+    @OneToMany(mappedBy = "card",cascade = CascadeType.ALL)
+    private List<Book> booksListByCard=new ArrayList<>();
+
+    @OneToMany(mappedBy = "card",cascade = CascadeType.ALL)
+    private List<Transaction> transactionsByCard=new ArrayList<>();
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public List<Book> getBooksListByCard() {
+        return booksListByCard;
+    }
+
+    public void setBooksListByCard(List<Book> booksListByCard) {
+        this.booksListByCard = booksListByCard;
+    }
+
+    public List<Transaction> getTransactionsByCard() {
+        return transactionsByCard;
+    }
+
+    public void setTransactionsByCard(List<Transaction> transactionsByCard) {
+        this.transactionsByCard = transactionsByCard;
+    }
 
     public int getId() {
         return id;
