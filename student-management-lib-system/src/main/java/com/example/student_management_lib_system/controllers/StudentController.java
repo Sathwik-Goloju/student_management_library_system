@@ -1,13 +1,11 @@
 package com.example.student_management_lib_system.controllers;
-
 import com.example.student_management_lib_system.model.Student;
 import com.example.student_management_lib_system.requestdto.StudentRequestDto;
 import com.example.student_management_lib_system.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController  // @Response+@Controller
 @RequestMapping("/student/api")
@@ -18,7 +16,17 @@ public class StudentController {
 
     @PostMapping("/save")
     public String saveStudent(@RequestBody StudentRequestDto studentRequestDto){
-        String response= studentService.studentSave(studentRequestDto);
-        return response;
+        try {
+            String response = studentService.studentSave(studentRequestDto);
+            return response;
+        }catch (Exception e){
+            return "Some error occurred: "+e.getMessage();
+        }
+    }
+
+    @GetMapping("/findBySemAndDept")
+    public List<Student> findStudentSemAndDepartment(String inSem,String inDept){
+        List<Student> resp = studentService.findStudentSenAndDept(inSem,inDept);
+        return resp;
     }
 }
