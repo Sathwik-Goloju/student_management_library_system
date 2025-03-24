@@ -4,6 +4,7 @@ import com.example.student_management_lib_system.requestdto.TransactionRequestDt
 import com.example.student_management_lib_system.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,10 +15,10 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @PostMapping("/save")
-    public String saveTransaction(TransactionRequestDto transactionRequestDto){
+    public String saveTransaction(@RequestBody TransactionRequestDto transactionRequestDto){
         try {
             String resp = transactionService.saveTransactionIntoDB(transactionRequestDto);
-        return resp;
+            return resp;
         } catch (Exception e) {
             return "Error at :"+e.getMessage();
         }

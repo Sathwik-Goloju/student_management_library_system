@@ -24,6 +24,36 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/find/{id}")
+    public Student findStudentById(@PathVariable int id){
+            Student student = studentService.findStudentById(id);
+            return student;
+    }
+
+    @GetMapping("findAll")
+    public List<Student> findAllStudents(){
+        List<Student> studentList= studentService.findAllStudents();
+        return studentList;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteStudentById(@PathVariable int id){
+        String resp=studentService.deleteStudentById(id);
+        return resp;
+    }
+
+    @PutMapping("/update/{id}")
+    public String updateStudentById(@PathVariable int id,@RequestBody StudentRequestDto studentRequestDto){
+        String resp = studentService.updateStudent(id,studentRequestDto);
+        return resp;
+    }
+
+    @GetMapping("/count")
+    public String countStudents(){
+        String resp=studentService.countStudents();
+        return resp;
+    }
+
     @GetMapping("/findBySemAndDept")
     public List<Student> findStudentSemAndDepartment(String inSem,String inDept){
         List<Student> resp = studentService.findStudentSenAndDept(inSem,inDept);

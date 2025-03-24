@@ -16,6 +16,6 @@ public class AuthorService {
     public String saveAuthor(AuthorRequestDto authorRequestDto){
         Author author= AuthorConverter.convertAuthorRequestDtoIntoAuthor(authorRequestDto);
         authorRepository.save(author);
-        return "Author Saved";
+        return "Author Saved Successuflly";
     }
 }

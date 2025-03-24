@@ -5,6 +5,7 @@ public enum Genre {
     NON_FICTION,
     DRAMA,
     ACTION,
+    TECHNOLOGY,
     HORROR,
     COMEDY,
     SCI_FICTION,

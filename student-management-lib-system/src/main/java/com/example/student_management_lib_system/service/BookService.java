@@ -26,8 +26,11 @@ public class BookService {
 
         //Here we need to add authorId and CardId (FKs of table)
         // for that add objects of card and author ot get them
-        Card card = cardRepository.findById(bookRequestDto.getCardIt()).get();
+        //System.out.println(("before ..."));
+        Card card = cardRepository.findById(bookRequestDto.getCardId()).get();
+        //System.out.println("after...");
         book.setCard(card);
+
         Author author= authorRepository.findById(bookRequestDto.getAuthorId()).get();
         book.setAuthor(author);
 

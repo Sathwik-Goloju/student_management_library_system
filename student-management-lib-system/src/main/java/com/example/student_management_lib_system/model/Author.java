@@ -1,5 +1,6 @@
 package com.example.student_management_lib_system.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class Author {
     @Column(name = "rating",nullable = false)
     private String rating;
 
+    @JsonManagedReference  //This decorate is added to manage multiple occurances of json data in loop
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
     private List<Book> booksByAuthor=new ArrayList<>();
 

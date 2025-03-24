@@ -1,5 +1,6 @@
 package com.example.student_management_lib_system.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 //to create a table, we write annotation @entity,@table
@@ -37,6 +38,7 @@ public class Student {
     @Column(name = "dept",nullable = false)
     private String dept;
 
+    @JsonManagedReference
     @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)  //Cascade-when we do operations(add/delete) that will takes place in card also
     private Card card;
 

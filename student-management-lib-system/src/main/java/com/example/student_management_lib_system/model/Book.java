@@ -1,6 +1,8 @@
 package com.example.student_management_lib_system.model;
 
 import com.example.student_management_lib_system.enums.Genre;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import javax.xml.crypto.Data;
@@ -39,14 +41,17 @@ public class Book {
     @Column(name = "availability",nullable = false)
     private boolean availability;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn
     private Author author;
 
+    @JsonBackReference  //Add this at Join column decorate
     @ManyToOne
     @JoinColumn
     private Card card;
 
+    @JsonManagedReference  //add this at mappedBy
     @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
     private List<Transaction> transactionsByBook=new ArrayList<>();
 

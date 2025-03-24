@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -31,9 +32,51 @@ public class StudentService {
        return "Student & Card saved successfully";
     }
 
+    public Student findStudentById(int id){
+        //To handle the null value, we use optional returns student else returns null
+       Optional<Student> studentOptional= studentRepository.findById(id);
+       if(studentOptional.isPresent()){
+           return studentOptional.get();
+           //return studentOptional.orElse(null);
+       }
+       return null;
+    }
+
+    public List<Student> findAllStudents(){
+       List<Student> studentList= studentRepository.findAll();
+       return studentList;
+    }
+    public String deleteStudentById(int id){
+        studentRepository.deleteById(id);
+        return "Deleted successfully";
+    }
+
+    //While updating we take id, dto object
+    public String updateStudent(int id,StudentRequestDto studentRequestDto){
+        Student student=findStudentById(id);
+        if(student!=null){
+            //TO examine updated few fields below of student
+            student.setName(studentRequestDto.getName());
+            student.setSem((studentRequestDto.getSem()));
+            student.setPhone(studentRequestDto.getPhone());
+            student.setEmail(studentRequestDto.getEmail());
+
+            studentRepository.save(student);
+            return  "student updated with fields";
+        }
+        else{
+            return "Cannot be updated";
+        }
+    }
+
+    public String countStudents(){
+        long cnt = studentRepository.count();
+        return "Total no os students :"+cnt;
+    }
+
     //example - custom query using JPA
     public List<Student> findStudentSenAndDept(String inSem, String inDept){
-        List<Student> students= studentRepository.findBySemAndDept(inSem,inDept);
-        return students;
+        List<Student> student= studentRepository.findBySemAndDept(inSem,inDept);
+        return student;
     }
 }

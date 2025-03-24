@@ -17,7 +17,7 @@ public class BookRequestDto {
 
     //Adding foreign keys which are present in this book table from DB
     private int authorId;
-    private  int cardIt;
+    private  int cardId;
     //Now add getters and setters for above foreign keys
     public int getAuthorId() {
         return authorId;
@@ -26,12 +26,12 @@ public class BookRequestDto {
         this.authorId = authorId;
     }
 
-    public int getCardIt() {
-        return cardIt;
+    public int getCardId() {
+        return cardId;
     }
 
-    public void setCardIt(int cardIt) {
-        this.cardIt = cardIt;
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
     }
 
     public String getTitle() {
