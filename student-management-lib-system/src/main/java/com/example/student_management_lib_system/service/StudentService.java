@@ -40,8 +40,9 @@ public class StudentService {
        if(studentOptional.isPresent()){
            return studentOptional.get();
            //return studentOptional.orElse(null);
+       }else{
+           throw new RuntimeException("Student not found for id :"+id);
        }
-       return null;
     }
 
     public List<Student> findAllStudents(){

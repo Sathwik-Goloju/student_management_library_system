@@ -3,6 +3,7 @@ import com.example.student_management_lib_system.model.Student;
 import com.example.student_management_lib_system.requestdto.StudentRequestDto;
 import com.example.student_management_lib_system.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +26,15 @@ public class StudentController {
     }
 
     @GetMapping("/find/{id}")
-    public Student findStudentById(@PathVariable int id){
+    public ResponseEntity<?> findStudentById(@PathVariable int id){
+        //ResponseEntity<T> is used when , What kind of return will throw and to handle exception error
+        // (or) if any diff return type were there
+        try {
             Student student = studentService.findStudentById(id);
-            return student;
+            return ResponseEntity.ok(student);
+        } catch (Exception e) {
+           return  ResponseEntity.internalServerError().body("Something error :"+e.getMessage());
+        }
     }
 
     @GetMapping("findAll")

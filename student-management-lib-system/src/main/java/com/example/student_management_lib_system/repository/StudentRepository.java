@@ -18,6 +18,7 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
     //find by 2 fields
     public List<Student> findBySemAndDept(String inputSem,String inputDep);
     public List<Student> findBySemOrDept(String inputSem,String inpDep);
+    public List<Student> findBySemOrDeptOrEmail(String inpSem,String inpDep,String inpEmail);
 
     //2 - With own sql queries
     @Query(nativeQuery = true,value = "select * from student_management_lib_system.student where dept=:inDept")
