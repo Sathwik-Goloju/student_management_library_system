@@ -54,6 +54,16 @@ public class StudentController {
         return resp;
     }
 
+    @GetMapping("/findAllByPage")
+    public List<Student> findAllStudentsByPageAndSort(@RequestParam int pageNum,@RequestParam int pageSize){
+        List<Student> studentList= studentService.findStudentByPageAndSort(pageNum,pageSize);
+        return studentList;
+    }
+//    public List<Student> findAllStudentsByPage(@RequestParam int pageNum,@RequestParam int pageSize){
+//        List<Student> studentList= studentService.findStudentByPage(pageNum,pageSize);
+//        return studentList;
+//    }
+
     @GetMapping("/findBySemAndDept")
     public List<Student> findStudentSemAndDepartment(String inSem,String inDept){
         List<Student> resp = studentService.findStudentSenAndDept(inSem,inDept);

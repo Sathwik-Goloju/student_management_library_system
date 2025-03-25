@@ -7,6 +7,8 @@ import com.example.student_management_lib_system.model.Student;
 import com.example.student_management_lib_system.repository.StudentRepository;
 import com.example.student_management_lib_system.requestdto.StudentRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,6 +75,23 @@ public class StudentService {
         long cnt = studentRepository.count();
         return "Total no os students :"+cnt;
     }
+
+    //pagination - fetching the data/records in form of pages
+    //This takes 2 inputs (pagNumber,pageSize) pagNumber- the page want to see and pageSize-total records in each page
+    //ex - say total 11 pages there, pageSize is 2; then
+    //0st page : 1-2, 1st page:3-4.......5page:11
+    //if only pagination wants then use
+//    public List<Student> findStudentByPage(int pageNumber,int pageSize){
+//        List<Student> studentList = studentRepository.findAll(PageRequest.of(pageNumber,pageSize)).getContent();
+//        return studentList;
+//    }
+    public List<Student> findStudentByPageAndSort(int pageNumber,int pageSize){
+       List<Student> studentList = studentRepository.findAll(PageRequest.of(pageNumber,pageSize, Sort.by("name").ascending())).getContent();
+       return studentList;
+    }
+
+    //sorting
+
 
     //example - custom query using JPA
     public List<Student> findStudentSenAndDept(String inSem, String inDept){
